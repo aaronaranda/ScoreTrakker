@@ -5,40 +5,42 @@ import javax.swing.JFileChooser;
 
 public class ScoreTrakker {
 	private ArrayList<Student> students;
-	
+	private String[] files = {"scores.txt", "badscores.txt", "nofile.txt" };
+
 	private void loadDataFromFile() {
-        //File Handling
-		FileReader reader = null;
-		String fileName = null;
-		JFileChooser fileChooser = new JFileChooser();
-		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			File selected = fileChooser.getSelectedFile();
-			fileName = selected.getAbsolutePath();
-		}
-		try {
-			reader = new FileReader(fileName);
-		} catch (FileNotFoundException e) {
-			System.out.println("Can't open file: " + fileName);
-		}
-		Scanner in = new Scanner(reader);
-		
-        //Data Collection
         students = new ArrayList<Student>(10);
-		while (in.hasNext()) {
-            Student student;
-        	String name = in.nextLine();	
-	    	String num = in.nextLine();
-            int score = 0;
-            try {
-                score = Integer.parseInt(num);
-            } catch (NumberFormatException n) {
-                System.out.println("Incorrect format for " + name + 
-                        " not at a valid score: " + score);
-            }   		
+
+        //File Handling
+        for (String f: files) {
+           FileReader reader = null;
+           Scanner in = null;
+           try {
+	           reader = new FileReader(f);
+		       in = new Scanner(reader);
+		   } catch (FileNotFoundException e) {
+	           System.out.println("Can't open file: " + f);
+               continue;
+           }
+            
+		
+            //Data Collection
+       
+	    	while (in.hasNext()) {
+                Student student;
+        	    String name = in.nextLine();	
+                String stringScore = in.nextLine();
+                int score = 0;
+                try {
+                    score = Integer.parseInt(stringScore);
+                } catch (NumberFormatException n) {
+                    System.out.println("Incorrect format for " + name + 
+                            " not at a valid score: " + stringScore);
+                }      		
     		student = new Student(name, score);       
             students.add(student);
 	    }
     }
+}
 	
 	private void printInOrder() {
         for (Student s: this.students) {
