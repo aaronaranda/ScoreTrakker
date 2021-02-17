@@ -19,6 +19,6 @@ public class Student implements Comparable<Student> {
 		//Not sure if this will work
 		return (this.name + " " + this.score); 
 	}
-	
+
 	
 }

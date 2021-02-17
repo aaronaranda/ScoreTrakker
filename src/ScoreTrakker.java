@@ -7,6 +7,7 @@ public class ScoreTrakker {
 	private ArrayList<Student> students;
 	
 	private void loadDataFromFile() {
+        //File Handling
 		FileReader reader = null;
 		String fileName = null;
 		JFileChooser fileChooser = new JFileChooser();
@@ -17,23 +18,36 @@ public class ScoreTrakker {
 		try {
 			reader = new FileReader(fileName);
 		} catch (FileNotFoundException e) {
-			System.out.println("File not Found");
+			System.out.println("Can't open file: " + fileName);
 		}
 		Scanner in = new Scanner(reader);
 		
+        //Data Collection
+        students = new ArrayList<Student>(10);
 		while (in.hasNext()) {
-			String name = in.nextLine();	
-			int score = in.nextInt();
-			Student student = new Student(name, score);
-		}
-		
-	}
+            Student student;
+        	String name = in.nextLine();	
+	    	String num = in.nextLine();
+            int score = 0;
+            try {
+                score = Integer.parseInt(num);
+            } catch (NumberFormatException n) {
+                System.out.println("Incorrect format for " + name + 
+                        " not at a valid score: " + score);
+            }   		
+    		student = new Student(name, score);       
+            students.add(student);
+	    }
+    }
 	
 	private void printInOrder() {
-        for (Student s: students) {
+        for (Student s: this.students) {
+            if (s != null) {
             System.out.println(s.toString());
-        } 
-	}
+            } 
+    	}
+    }
+
 	
 	private void processFiles() {
 		
@@ -42,6 +56,7 @@ public class ScoreTrakker {
 	public static void main(String[] args) {
 		ScoreTrakker trakker = new ScoreTrakker();
 		trakker.loadDataFromFile();
+        trakker.printInOrder();
 	}
 	
 	
