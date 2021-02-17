@@ -21,18 +21,18 @@ public class ScoreTrakker {
 		}
 		Scanner in = new Scanner(reader);
 		
-		while (in.hasNext()){
-			String line = in.next();	
-			String[] temp = line.split(" ");
-			String name = temp[0] + " " + temp[1];
-			int score = Interger.valueOf(temp[2]);
-			Student student = new Student(name, score)
-			}
+		while (in.hasNext()) {
+			String name = in.nextLine();	
+			int score = in.nextInt();
+			Student student = new Student(name, score);
+		}
 		
 	}
 	
 	private void printInOrder() {
-		
+        for (Student s: students) {
+            System.out.println(s.toString());
+        } 
 	}
 	
 	private void processFiles() {
