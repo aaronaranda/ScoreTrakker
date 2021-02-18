@@ -1,13 +1,9 @@
-Johnny Bob
-20
-Alice Wonderland
-53
-Kobe Bryant 
-24
-John Elway
-7
-Elvis Presley
-69
-
-
+Jane Doe 
+90
+GI Joe
+99
+Spider Man
+50
+SpongeBob SquarePants
+100
 
